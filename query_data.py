@@ -28,13 +28,16 @@ def query_rag(query_text):
     context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
     prompt = prompt_template.format(context=context_text, question=query_text)
-    print(prompt)
+    # print(prompt)
 
     model = Ollama(model="llama3", stream=True)
+    response = []
 
     for token in model.stream(prompt):
         print(token, end='', flush=True)
+        response.append(token)
 
-    return None
+    print()
 
-query_rag("What is the best way to increase the speed of my internet connection?")
+    response_text = "".join(response)
+    return response_text
