@@ -5,16 +5,15 @@ from get_embedding_function import get_embedding_function
 
 CHROMA_PATH = "chroma"
 
-PROMPT_TEMPLATE = """
-You are a helpful assistant used by a customer for ISP JioFiber. Answer the following question based only on the provided context:
-
-{context}
-
----
-
-Question: {question}
-Answer this question without mentioning about the context that you have read.
-"""
+PROMPT_TEMPLATE = """DOCUMENT: {context}
+    QUESTION: {question}
+    You are a chatbot designed to assist the users.
+    INSTRUCTIONS:
+    Answer the QUESTION using the DOCUMENT text above, only mention the facts that are relevent to the question.
+    Keep your answer ground in the facts of the DOCUMENT.
+    If the DOCUMENT doesn’t contain the facts to answer the QUESTION then just say that you don't know and don't metion the document.
+    The USER should not know that you are provided a DOCUMENT.
+    """
 
 def query_rag(query_text):
     embedding_function = get_embedding_function()

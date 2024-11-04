@@ -1,24 +1,8 @@
 import streamlit as st
-from langchain_chroma import Chroma
-from langchain.prompts import ChatPromptTemplate
-from langchain_ollama import OllamaLLM as Ollama
-from get_embedding_function import get_embedding_function
 from query_data import query_rag
 
-CHROMA_PATH = "chroma"
-
-PROMPT_TEMPLATE = """
-You are a helpful assistant used by a customer for ISP JioFiber. Answer the following question based only on the provided context:
-
-{context}
-
----
-
-Question: {question}
-Answer this question without mentioning about the context that you have read.
-"""
-
 st.title('Chatbot')
+st.chat_message('assistant').markdown("Hello! I'm a chatbot designed to assist you. How can I help you?")
 
 if 'messages' not in st.session_state:
     st.session_state.messages = []
